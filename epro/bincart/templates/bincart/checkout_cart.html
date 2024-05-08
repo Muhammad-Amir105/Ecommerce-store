@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %}checkout_cart{% endblock%}
-
+{% block header %}{% include 'header.html' %}{% endblock %}
 {% block body %}
-    {% include 'header.html' %}
+    
         
         <!-- BEGIN #checkout-cart -->
         <div class="section-container" id="checkout-cart">
@@ -25,43 +25,51 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    
+                                        {% for c in cartitems %}
                                         <tr>
                                             <td class="cart-product">
                                                 <div class="product-img">
-                                                    <img src="assets/img/iphone-6s-plus.png" alt="" />
+                                                    <img src="{{c.electricproduct.image.url}}" alt="" />
                                                 </div>
                                                 <div class="product-info">
-                                                    <div class="title">iPhone 6s Plus 16GB (Silver)</div>
-                                                    <div class="desc">Delivers Tue 26/04/2016 - Free</div>
+                                                    <div class="title">{{c.electricproduct.name}}</div>
+                                                    <div class="desc">{{c.electricproduct.description}}</div>
                                                 </div>
                                             </td>
-                                            <td class="cart-price text-center">$999.00</td>
+                                            <td class="cart-price text-center">{{c.electricproduct.orignal_price}}</td>
                                             <td class="cart-qty text-center">
                                                 <div class="cart-qty-input">
-                                                    <a href="#" class="qty-control left disabled" data-click="decrease-qty" data-target="#qty"><i class="fa fa-minus"></i></a>
+                                                    <button type="submit" name="action" value="decrease"><i class="fa fa-minus"></i></button>
                                                     <input type="text" name="qty" value="1" class="form-control" id="qty" />
-                                                    <a href="#" class="qty-control right disabled" data-click="increase-qty" data-target="#qty"><i class="fa fa-plus"></i></a>
+                                                    <button type="submit" name="action" value="increase"><i class="fa fa-plus"></i></button>
                                                 </div>
                                                 <div class="qty-desc">1 to max order</div>
                                             </td>
+                                            
+                                        
                                             <td class="cart-total text-center">
-                                                $999.00
+                                                {{c.total_price}}
                                             </td>
+                                            
+                                            
+                                            
                                         </tr>
-                                        <tr>
+                                        {% endfor %}
+                                        
                                             <td class="cart-summary" colspan="4">
                                                 <div class="summary-container">
                                                     <div class="summary-row">
                                                         <div class="field">Cart Subtotal</div>
-                                                        <div class="value">$999.00</div>
+                                                        <div class="value">{{product_total_price}}</div>
                                                     </div>
                                                     <div class="summary-row text-danger">
                                                         <div class="field">Free Shipping</div>
-                                                        <div class="value">$0.00</div>
+                                                        <div class="value">shipping price abhi likhni he</div>
                                                     </div>
                                                     <div class="summary-row total">
                                                         <div class="field">Total</div>
-                                                        <div class="value">$999.00</div>
+                                                        <div class="value">{{product_total_price}}</div>
                                                     </div>
                                                 </div>
                                             </td>
